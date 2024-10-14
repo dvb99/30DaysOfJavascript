@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Countries Data</title>
+    <style>
+        
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header {
+            margin-top: 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #f8a51b;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .buttons {
+            margin: 20px 0;
+        }
+
+        .buttons button {
+            background-color: #f8a51b;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            margin: 0 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .buttons button:hover {
+            background-color: #e5941b;
+        }
+
+        .bar {
+            display: grid;
+            grid-template-columns: 1fr 5fr 1fr;
+            margin: 10px;
+        }
+
+        .bar-country {
+            background-color: yellow;
+            padding: 10px;
+            text-align: left;
+            margin: 2px;
+            border: #e5941b 1px solid;
+            border-radius: 5px;
+        }
+
+        .bar-size {
+            background-color:darkgray ;
+            padding: 10px;
+            margin: 2px;
+            border: #e5941b 1px solid;
+            border-radius: 5px;
+        }
+
+        .bar-value {
+            background-color:aquamarine;
+            padding: 10px;
+            margin: 2px;
+            border: #e5941b 1px solid;
+            border-radius: 5px;
+
+        }
+    </style>
+
+    <script src="main.js" type="module"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>World Countries Data</h1>
+            <p>Currently, we have 250 countries</p>
+        </div>
+
+        <div class="buttons">
+            <button id="Population">Population</button>
+            <button id="Languages">Languages</button>
+        </div>
+
+        <div class="DataContainer">
+        </div>
+
+    </div>
+</body>
+</html>
+
+  
