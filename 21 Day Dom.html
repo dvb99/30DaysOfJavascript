@@ -1,0 +1,88 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript for Everyone:DOM</title>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+
+        // for all the elements except list items, set align center
+        const elements = document.querySelectorAll('body');
+        elements.forEach(element => {
+          element.style.textAlign = 'center';
+          element.style.alignItems = 'center';
+        });
+        
+        // The year color is changing every 1 second
+        setInterval(() => {
+          const year = document.querySelector('.year');
+          const colors = ['red', 'green', 'blue', 'yellow', 'pink', 'purple', 'orange', 'black', 'brown', 'gray'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          year.style.color = randomColor;
+        }, 1000);
+
+        // create and insert h3 element after h2 element
+        const h2 = document.querySelector('h2');
+        const span = document.createElement('span');
+        h2.insertAdjacentElement('afterend', span);
+        // assign current date and time to the span element
+        setInterval(() => {
+          const date = new Date();
+          span.textContent = date.toLocaleString();
+        }, 1000); 
+        
+        // The date and time background color is changing every on seconds
+        setInterval(() => {
+          const colors = ['red', 'green', 'blue', 'yellow', 'pink', 'purple', 'orange', 'black', 'brown', 'gray'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          span.style.backgroundColor = randomColor;
+        }, 1000);
+
+        // get the querySelectorAll for all the li elements
+        const lis = document.querySelectorAll('li');
+        // loop through all the li elements and extract the text content
+        lis.forEach(li => {
+            if (li.textContent.toLowerCase().includes('done')) {
+            li.style.backgroundColor = 'red';
+            }
+            if (li.textContent.toLowerCase().includes('ongoing')) {
+            li.style.backgroundColor = 'green';
+            }
+            if (li.textContent.toLowerCase().includes('coming')) {
+            li.style.backgroundColor = 'blue';
+            }
+            // console.log(li.textContent);
+
+            // change bullet points to None
+            li.style.listStyleType = 'none';
+
+            // add padding to the li elements
+            li.style.padding = '10px';
+
+            // set the width of the li elements
+            li.style.width = '50%';
+
+            // set the margin to auto
+            li.style.margin = 'auto';
+        });
+
+      });
+      </script>
+  </head>
+  <body>
+    <div class="wrapper">
+        <h1>Asabeneh Yetayeh challenges in <span class="year">2020</span></h1>
+        <h2>30DaysOfJavaScript Challenge</h2>
+        <ul>
+            <li>30DaysOfPython Challenge Done</li>
+            <li>30DaysOfJavaScript Challenge Ongoing</li>
+            <li>30DaysOfReact Challenge Coming</li>
+            <li>30DaysOfFullStack Challenge Coming</li>
+            <li>30DaysOfDataAnalysis Challenge Coming</li>
+            <li>30DaysOfReactNative Challenge Coming</li>
+            <li>30DaysOfMachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+  </body>
+</html>

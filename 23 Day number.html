@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Generator</title>
+    <style>
+        
+
+        h1 {
+            color: #28a745;
+            margin: 0;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #28a745;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 50vh;">
+      <h1>Number Generator</h1>
+      <p>30DaysOfJavaScript: DOM Day 3</p>
+      <p>Author: Asabeneh Yetayeh</p>
+      <div style="display: flex; margin-top: 20px;">
+
+      <input type="text" placeholder="Enter a number" />
+      <button type="button" id="button1">Generate numbers</button>
+      </div>
+    </div>
+
+    <div id="output"></div>
+
+        <script>
+            const input = document.querySelector('input');
+            const button = document.querySelector('#button1');  
+
+            input.addEventListener('input', () => {
+                const value = input.value;
+                if (value === '') {
+                input.setCustomValidity('');
+                } else if (isNaN(value)) {
+                input.setCustomValidity('Please enter a valid number');
+                } else {
+                input.setCustomValidity('');
+                }
+                input.reportValidity();
+            });
+
+            button.addEventListener('click', () => {
+              const value = input.value;
+              const container = document.getElementById('output');
+              container.style.display = 'flex';
+              container.style.flexWrap = 'wrap';
+              container.style.justifyContent = 'center';
+              container.style.alignItems = 'center';
+              container.style.width = '100%';
+              container.innerHTML = '';
+              for (let i = 1; i <= value; i++) {
+                const div = document.createElement('div');
+                div.textContent = i;
+                div.style.width = '100px';
+                div.style.height = '50px';
+                div.style.display = 'flex';
+                div.style.justifyContent = 'center';
+                div.style.alignItems = 'center';
+                div.style.backgroundColor = '#28a745';
+                div.style.color = 'black';
+                div.style.borderRadius = '5px';
+                container.appendChild(div);
+              }
+              
+            });
+
+            // document.body.appendChild(container);
+        </script>
+
+    </div>
+
+</body>
+</html>
