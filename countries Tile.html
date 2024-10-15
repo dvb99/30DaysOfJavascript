@@ -3,70 +3,51 @@
 <html lang="en">
   <head>
     <title>JavaScript for Everyone:DOM</title>
+  
+    <style type="text/css">
+      button {
+        background-color: #6b37d4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
 
-    
+    /* Pressed state styling */
+    .pressed {
+        background-color: yellow; /* Darker color for pressed state */
+    }
+  </style>
+  <script src="./main.js" type="module"></script> 
+
+  
   </head>
   <body>
     <div class="wrapper">
         <h1 style="text-align: center; letter-spacing: 3px;">World Countries List</h1>
         <p style="text-align: center; font-size: 1rem;">Total Number of Countries: <span id="country-count"></span></p>
-        <script>
-          const countries = [
-            'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia'
-          ];
 
-          document.getElementById('country-count').textContent = countries.length;
-            const paragraph = document.createElement('p');
-            paragraph.innerHTML = '30 days of JavaScript: Dom Day-2.<br>Author: DVB';
-            paragraph.style.textAlign = 'center';
-            paragraph.style.fontSize = '1rem';
-            document.body.appendChild(paragraph);
+        <div class="search-container" style="text-align: center;">
+          <p id="typedCount"></p>
+  
+            <div class="buttons">
+              <button id="starting-word-btn" >Starting Word</button>
+              <button id="any-word-btn">Search with Any Word</button>
+              <button id="sort-btn">Sort</button>
+            </div>
 
-        </script>
+  
+          <div  style="margin: 10px;">
+              <input type="text" placeholder="Search country ..." id="search-bar">
+              <button>
+                    <img src="https://img.icons8.com/ios-filled/50/000000/search.png" alt="Search Icon">
+              </button>
+          </div>
 
-        <script>
-        
-            const container = document.createElement('div');
-            container.style.display = 'grid';
-            container.style.display = 'grid';
-            container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
-            container.style.gap = '5px';
-            container.style.padding = '20px';
+          <div id="search-result" style="text-align: center;"></div>
 
+      </div>
 
-
-
-            countries.forEach(country => {
-                const number = document.createElement('div');
-                number.style.display = 'flex';
-                number.style.justifyContent = 'center';
-                number.style.alignItems = 'center';
-                // number.style.width = '150px';
-                number.style.height = '100px';
-                // number.style.backgroundColor = '#f0f0f0';
-                number.style.border = '1px solid #ddd';
-                number.style.fontSize = '1rem';
-                // number.style.fontWeight = 'bold';
-                number.style.padding = '10px';
-                number.style.margin = '5px';
-                number.style.borderRadius = '5px';
-                number.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-                
-              
-                // number.style.color = '#333';
-                
-                
-                number.textContent = country;
-
-                container.appendChild(number);
-            
-
-            document.body.appendChild(container);
-              }
-          
-          );
-    
-          </script>
     </div>
   </body>
 </html>

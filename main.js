@@ -1,180 +1,112 @@
-import { countries_data } from "./countries_data.js";
+import { countries } from "./countries.js";
 
-const countries = countries_data;
+const allcountries = countries;
 
-// iterate through countries array of objects and calculate the sum of population of all countries
-let total_population = 0;
-for (let i = 0; i < countries.length; i++) {
-  total_population += countries[i].population;
+// console.log(allcountries);
+
+
+
+document.getElementById('country-count').textContent = allcountries.length;
+
+
+function dotheGrid(countriesData) {
+    const container = document.getElementById('search-result');
+    container.style.display = 'grid';
+    container.style.gap = '5px';
+    container.style.padding = '20px';
+    container.innerHTML = '';
+
+    container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
+
+
+    countriesData.forEach(country => {
+        const number = document.createElement('div');
+        number.style.display = 'flex';
+        number.style.justifyContent = 'center';
+        number.style.alignItems = 'center';
+        // number.style.width = '150px';
+        number.style.height = '100px';
+        // number.style.backgroundColor = '#f0f0f0';
+        number.style.border = '1px solid #ddd';
+        number.style.fontSize = '1rem';
+        // number.style.fontWeight = 'bold';
+        number.style.padding = '10px';
+        number.style.margin = '5px';
+        number.style.borderRadius = '5px';
+        number.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+        
+      
+        // number.style.color = '#333';
+        
+        
+        number.textContent = country;
+
+        container.appendChild(number);
+
+      });
+
 }
 
-// console.log(total_population); // 7757980095
 
-// get top 20 countries with highest population
-const top_20_countries = countries.reduce((acc, country) => {
-  if (acc.length < 20) {
-    acc.push(country);
-    acc.sort((a, b) => b.population - a.population);
-  } else if (country.population > acc[19].population) {
-    acc[19] = country;
-    acc.sort((a, b) => b.population - a.population);
+
+const startingWordBtn = document.getElementById('starting-word-btn');
+const anyWordBtn = document.getElementById('any-word-btn');
+const sortBtn = document.getElementById('sort-btn');
+let activeButton = sortBtn;
+
+const searchInput = document.getElementById('search-bar');
+
+searchInput.addEventListener('input', () => {
+  if (activeButton === startingWordBtn) {
+  const searchValue = searchInput.value;
+  const filteredCountries = allcountries.filter(country => {
+    return country.toLowerCase().startsWith(searchValue.toLowerCase());
+    
+  });
+    dotheGrid(filteredCountries);
+  } else if (activeButton === anyWordBtn) {
+    const searchValue = searchInput.value;
+    const filteredCountries = allcountries.filter(country => {
+      return country.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    dotheGrid(filteredCountries);
+    } 
+  console.log(activeButton.textContent);
+});
+
+
+
+startingWordBtn.addEventListener('click', () => {
+  startingWordBtn.classList.toggle('pressed');
+  anyWordBtn.classList.remove('pressed');
+  sortBtn.classList.remove('pressed');
+  activeButton = startingWordBtn;
+});
+
+anyWordBtn.addEventListener('click', () => {
+  anyWordBtn.classList.toggle('pressed');
+  startingWordBtn.classList.remove('pressed');
+  sortBtn.classList.remove('pressed');
+  activeButton = anyWordBtn;
+});
+
+sortBtn.addEventListener('click', () => {
+  sortBtn.classList.toggle('pressed');
+  startingWordBtn.classList.remove('pressed');
+  anyWordBtn.classList.remove('pressed');
+  activeButton = sortBtn;
+
+
+  if (sortBtn.classList.contains('ascending')) {
+    allcountries.sort((a, b) => b.localeCompare(a));
+    sortBtn.classList.remove('ascending');
+    sortBtn.classList.add('descending');
+  } else {
+    allcountries.sort((a, b) => a.localeCompare(b));
+    sortBtn.classList.remove('descending');
+    sortBtn.classList.add('ascending');
   }
-  return acc;
-}, []);
-
-// console.log(top_20_countries);
-
-
-// get top 10 mostly spoken languages
-const languages = countries.reduce((acc, country) => {
-  country.languages.forEach(language => {
-    if (acc[language]) {
-      acc[language]++;
-    } else {
-      acc[language] = 1;
-    }
-  });
-  return acc;
-}, {});
-
-const top_10_languages = Object.keys(languages)
-  .sort((a, b) => languages[b] - languages[a])
-  .slice(0, 10)
-  .map(language => ({ language, count: languages[language] }));
-
-console.log(top_10_languages);
-
-// add listeners to the buttons
-
-document.getElementById("Population").addEventListener("mouseover", function () {
-
-  // find the div with class DataContainer
-  const PopulationContainer = document.querySelector(".DataContainer");
-
-  PopulationContainer.innerHTML = "";
-
-  // create a div element for the world population
-  const headerbar = document.createElement("div");
-  headerbar.setAttribute("class", "bar");
-
-  // create a div element for the country name and set the text content to the name of the country
-  const countryName = document.createElement("div");
-  countryName.setAttribute("class", "bar-country");
-  countryName.textContent = "World";
-  headerbar.appendChild(countryName);
-
-  // create a div element for the population ratio and set the text content to the name of the country
-  const popratio = document.createElement("div");
-  popratio.setAttribute("class", "bar-size");
-  headerbar.appendChild(popratio);
-
-  // create a div element for the population and set the text content to the population of the country
-  const popValue = document.createElement("div");
-  popValue.setAttribute("class", "bar-value");
-  popValue.textContent = total_population;
-  headerbar.appendChild(popValue);
-
-  PopulationContainer.appendChild(headerbar);
-
-  top_20_countries.forEach(country => {
-    // create a div element for the world population
-    const dataEle = document.createElement("div");
-    dataEle.setAttribute("class", "bar");
-
-    // create a div element for the country name and set the text content to the name of the country
-    const countryName = document.createElement("div");
-    countryName.setAttribute("class", "bar-country");
-    countryName.textContent = country.name;
-    dataEle.appendChild(countryName);
-
-    // create a div element for the population ratio and set the text content to the name of the country
-    const popratio = document.createElement("div");
-    popratio.setAttribute("class", "bar-size");
-    popratio.style.width = `${(country.population / total_population) * 100}%`;
-    dataEle.appendChild(popratio);
-
-    // create a div element for the population and set the text content to the population of the country
-    const popValue = document.createElement("div");
-    popValue.setAttribute("class", "bar-value");
-    popValue.textContent = country.population;
-    dataEle.appendChild(popValue);
-
-    PopulationContainer.appendChild(dataEle);
-  });
+  dotheGrid(allcountries);
 });
-
-
-document.getElementById("Languages").addEventListener("mouseover", function () {
-
-  // find the div with class DataContainer
-  const langContainer = document.querySelector(".DataContainer");
-
-  langContainer.innerHTML = "";
-
-
-  const headerbar = document.createElement("div");
-  headerbar.setAttribute("class", "bar");
-  // headerbar.style.backgroundColor = "blue";
-
-
-  const langName = document.createElement("div");
-  langName.setAttribute("class", "bar-country");
-  langName.textContent = "World";
-  headerbar.appendChild(langName);
-
-
-  // create a div element for the population ratio and set the text content to the name of the country
-  const popratio = document.createElement("div");
-  popratio.setAttribute("class", "bar-size");
-  headerbar.appendChild(popratio);
-
-
-
-  // create a div element for the population and set the text content to the population of the country
-  const cnt = document.createElement("div");
-  cnt.setAttribute("class", "bar-value");
-  cnt.textContent = countries.length;
-  headerbar.appendChild(cnt);
-
-
-  langContainer.appendChild(headerbar);
-
-
-  top_10_languages.forEach(lang => {
-
-
-    // create a div element for the world population
-    const dataEle = document.createElement("div");
-    dataEle.setAttribute("class", "bar");
-    // dataEle.style.backgroundColor = "blue";
-
-
-    const langName = document.createElement("div");
-    langName.setAttribute("class", "bar-country");
-    langName.textContent = lang.language;
-    dataEle.appendChild(langName);
-
-
-    const popratio = document.createElement("div");
-    popratio.setAttribute("class", "bar-size");
-    popratio.style.width = `${(lang.count / 230) * 100}%`;
-    dataEle.appendChild(popratio);
-
-
-    const popValue = document.createElement("div");
-    popValue.setAttribute("class", "bar-value");
-    popValue.textContent = lang.count;
-    dataEle.appendChild(popValue);
-
-
-    langContainer.appendChild(dataEle);
-
-  });
-
-
-});
-
-
-
 
 
