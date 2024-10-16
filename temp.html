@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Ticker</title>
+  <style>
+    body {
+      background: red;
+    }
+
+    .page-head {
+      background: white;
+      box-sizing: border-box;
+      padding-left: 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: inline-block;
+    }
+
+    /**
+ * Ticker
+ */
+
+    .page-head__ticker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Arial";
+      font-size: 11px;
+      font-weight: Bold;
+      height: 36px;
+      line-height: 1;
+      padding: 0 12px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      position: relative;
+
+    }
+
+    .msg {
+      margin: 0 auto;
+      white-space: nowrap;
+      position: absolute;
+      width: 100%;
+    }
+
+    .msg span {
+      animation: marquee 12s linear infinite;
+      display: inline-block;
+      padding-left: calc(100% + 12px);
+    }
+
+    .msg--two span {
+      animation-delay: 4s;
+    }
+
+    .msg--three span {
+      animation-delay: 8s;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(-100%, 0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="page-head">
+
+    <div class="page-head__ticker">
+      <p class="msg"><span>First item</span></p>
+      <p class="msg msg--two"><span>second item</span></p>
+      <p class="msg msg--three"><span>third item</span></p>
+    </div>
+
+  </header>
+
+</body>
+
+</html>

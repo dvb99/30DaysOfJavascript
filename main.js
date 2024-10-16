@@ -1,112 +1,41 @@
-import { countries } from "./countries.js";
-
-const allcountries = countries;
-
-// console.log(allcountries);
 
 
+const personalitiesList = [ 'instructor', 'student', 'mentor' ];
 
-document.getElementById('country-count').textContent = allcountries.length;
+const delays = [12, 4, 8]
 
-
-function dotheGrid(countriesData) {
-    const container = document.getElementById('search-result');
-    container.style.display = 'grid';
-    container.style.gap = '5px';
-    container.style.padding = '20px';
-    container.innerHTML = '';
-
-    container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
+// add children to <div class="page-head__ticker">
+const ticker = document.getElementById('page-head__ticker');
 
 
-    countriesData.forEach(country => {
-        const number = document.createElement('div');
-        number.style.display = 'flex';
-        number.style.justifyContent = 'center';
-        number.style.alignItems = 'center';
-        // number.style.width = '150px';
-        number.style.height = '100px';
-        // number.style.backgroundColor = '#f0f0f0';
-        number.style.border = '1px solid #ddd';
-        number.style.fontSize = '1rem';
-        // number.style.fontWeight = 'bold';
-        number.style.padding = '10px';
-        number.style.margin = '5px';
-        number.style.borderRadius = '5px';
-        number.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-        
-      
-        // number.style.color = '#333';
-        
-        
-        number.textContent = country;
+personalitiesList.forEach((personality,index) => {
 
-        container.appendChild(number);
-
-      });
-
-}
-
-
-
-const startingWordBtn = document.getElementById('starting-word-btn');
-const anyWordBtn = document.getElementById('any-word-btn');
-const sortBtn = document.getElementById('sort-btn');
-let activeButton = sortBtn;
-
-const searchInput = document.getElementById('search-bar');
-
-searchInput.addEventListener('input', () => {
-  if (activeButton === startingWordBtn) {
-  const searchValue = searchInput.value;
-  const filteredCountries = allcountries.filter(country => {
-    return country.toLowerCase().startsWith(searchValue.toLowerCase());
+    const msg = document.createElement('p');
+    msg.classList.add(`msg`);
     
-  });
-    dotheGrid(filteredCountries);
-  } else if (activeButton === anyWordBtn) {
-    const searchValue = searchInput.value;
-    const filteredCountries = allcountries.filter(country => {
-      return country.toLowerCase().includes(searchValue.toLowerCase());
-    });
-    dotheGrid(filteredCountries);
-    } 
-  console.log(activeButton.textContent);
+
+    const span = document.createElement('span');
+    span.textContent = personality;
+    span.style.animationDelay = `${delays[index]}s`;
+
+    msg.appendChild(span);
+
+    ticker.appendChild(msg);
+
 });
 
 
 
-startingWordBtn.addEventListener('click', () => {
-  startingWordBtn.classList.toggle('pressed');
-  anyWordBtn.classList.remove('pressed');
-  sortBtn.classList.remove('pressed');
-  activeButton = startingWordBtn;
-});
 
-anyWordBtn.addEventListener('click', () => {
-  anyWordBtn.classList.toggle('pressed');
-  startingWordBtn.classList.remove('pressed');
-  sortBtn.classList.remove('pressed');
-  activeButton = anyWordBtn;
-});
+const proglang = ["python", "REact", "Html"]
 
-sortBtn.addEventListener('click', () => {
-  sortBtn.classList.toggle('pressed');
-  startingWordBtn.classList.remove('pressed');
-  anyWordBtn.classList.remove('pressed');
-  activeButton = sortBtn;
+const proglangText = document.getElementById('techName');
 
+let proglangIndex = 0;
 
-  if (sortBtn.classList.contains('ascending')) {
-    allcountries.sort((a, b) => b.localeCompare(a));
-    sortBtn.classList.remove('ascending');
-    sortBtn.classList.add('descending');
-  } else {
-    allcountries.sort((a, b) => a.localeCompare(b));
-    sortBtn.classList.remove('descending');
-    sortBtn.classList.add('ascending');
-  }
-  dotheGrid(allcountries);
-});
+// change the text content of the techName element every 2 seconds
 
-
+setInterval(() => {
+    proglangIndex = (proglangIndex + 1) % proglang.length;
+    proglangText.textContent = proglang[proglangIndex];
+}, 2000);
