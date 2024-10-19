@@ -1,149 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asabeneh Yetayeh</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30 Days Of JavaScript Challenge Leaderboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: antiquewhite;
-            padding: 20px;
-            border-radius: 10px;
-        }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-        h1 {
-            font-size: 48px;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-            margin-left: 5%;
-        }
+    h1 {
+      text-align: center;
+      font-size: 24px;
+    }
 
-        p {
-            font-size: 18px;
-            color: #555;
-            line-height: 1.6;
-            margin-left: 5%;
-            margin-top: 5%;
-        }
+    .form {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
 
-        .technologies {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
+    .form input {
+      padding: 10px;
+      width: 20%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-        .box {
-            width: 250px;
-            height: 150px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 18px;
-            color: #333;
-        }
+    .form button {
+      padding: 10px 20px;
+      background-color: #ff7a7a;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
+    .form button:hover {
+      background-color: #ff4a4a;
+    }
 
-        .page-head {
-            background: white;
-            box-sizing: border-box;
-            padding-left: 16px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: inline-block;
-        }
+    .warning {
+      color: red;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        #page-head__ticker {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: "Arial";
-            font-size: 11px;
-            font-weight: Bold;
-            height: 36px;
-            line-height: 1;
-            padding: 0 12px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            position: relative;
+    #leaderboard {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
 
-        }
+    #leaderboard th, #leaderboard td {
+      text-align: center;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
 
-        .msg {
-            margin: 0 auto;
-            white-space: nowrap;
-            position: absolute;
-            width: 100%;
-        }
+    #leaderboard tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
-        .msg span {
-            animation: marquee 12s linear infinite;
-            display: inline-block;
-            padding-left: calc(100% + 12px);
-        }
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
 
-        /* .msg--two span {
-            animation-delay: 4s;
-        }
+    .actions button {
+      background-color: #ff4a4a;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .msg--three span {
-            animation-delay: 8s;
-        } */
-
-        @keyframes marquee {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            100% {
-                transform: translate(-100%, 0);
-            }
-        }
-    </style>
-    <script src="./main.js" type="module"></script>
+    .actions button:hover {
+      background-color: #e03e3e;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Asabeneh Yetayeh</h1>
 
-        <header class="page-head">
+<div class="container">
+  <h1>30 Days Of JavaScript Challenge Leaderboard</h1>
 
-            <div id="page-head__ticker">
-                <!-- <p class="msg"><span>First item</span></p>
-                <p class="msg msg--two"><span>second item</span></p>
-                <p class="msg msg--three"><span>third item</span></p> -->
-            </div>
-        
-        </header>
+  <div class="form">
+    <input type="text" placeholder="First Name" id="firstName">
+    <input type="text" placeholder="Last Name" id="lastName">
+    <input type="text" placeholder="Country" id="country">
+    <input type="text" placeholder="Player Score" id="playerScore">
+    <button id="addPlayer">Add Player</button>
+  </div>
 
-        <p>I am Asabeneh Yetayeh. I am an instructor, developer, motivator and content creator. I love educating people
-            and creating educational materials. In January 2019, I also created a teaching material <strong>JavaScript
-                For Everyone</strong>. In December 2019, I created <strong>30Days Of Python</strong> challenge and in
-            January 2020 <strong>30 Days Of JavaScript</strong> challenge.</p>
+  <div class="warning">All fields are required</div>
 
-        <div class="technologies">
-            <div class="box">JAVASCRIPT FOR EVERYONE</div>
-            <div class="box">30DAYS OF PYTHON</div>
-            <div class="box">30DAYS OF JAVASCRIPT</div>
+  <table id="leaderboard">
+    <!-- <tr>
+      <th>Name</th>
+      <th>Country</th>
+      <th>Score</th>
+      <th>Actions</th>
+    </tr> -->
+    <!-- <tr>
+      <td>Martha Yohanes</td>
+      <td>Finland</td>
+      <td>85</td>
+      <td>
+        <div class="actions">
+          <button>🗑️</button>
+          <button>+5</button>
+          <button>-5</button>
         </div>
+      </td>
+    </tr>
+    <tr>
+      <td>David Smith</td>
+      <td>United Kingdom</td>
+      <td>80</td>
+      <td>
+        <div class="actions">
+          <button>🗑️</button>
+          <button>+5</button>
+          <button>-5</button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Asabeneh Yetayeh</td>
+      <td>Finland</td>
+      <td>75</td>
+      <td>
+        <div class="actions">
+          <button>🗑️</button>
+          <button>+5</button>
+          <button>-5</button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Mathias Elias</td>
+      <td>Sweden</td>
+      <td>70</td>
+      <td>
+        <div class="actions">
+          <button>🗑️</button>
+          <button>+5</button>
+          <button>-5</button>
+        </div>
+      </td>
+    </tr> -->
+  </table>
+</div>
 
-        <p> technologies I teach <span id="techName"></span></p>
-    </div>
+<script src="main.js" type="module"></script>
 </body>
-
 </html>
