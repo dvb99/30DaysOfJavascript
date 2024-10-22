@@ -1,53 +1,165 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>JavaScript for Everyone:DOM</title>
-  
-    <style type="text/css">
-      button {
-        background-color: #6b37d4;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
+
+<head>
+  <title>JavaScript for Everyone:DOM</title>
+
+  <style type="text/css">
+    button {
+      background-color: #6b37d4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+      
     }
 
     /* Pressed state styling */
     .pressed {
-        background-color: yellow; /* Darker color for pressed state */
+      background-color: yellow;
+      
     }
+
+    /* add styles for input type radio */
+    input[type="radio"] {
+      visibility: hidden;
+    }
+
+    label {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: aquamarine;
+      margin: 5px;
+      border-radius: 5px;
+    }
+
+    #search-bar {
+      background-color: bisque;
+      color: black;
+      border: none;
+      cursor: pointer;
+      width: 80%;
+      padding: 5px;
+      font-size: 1rem;
+      text-align: center;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    fieldset {
+      display: inline;
+      border-style: none;
+      margin-top: 10px;
+    }
+
+
+
+    #chartContainer {
+      align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: bisque;
+    padding: 10px;
+    }
+
+    .bar {
+            display: grid;
+            grid-template-columns: 1fr 5fr 1fr;
+            margin: 10px;
+        }
+
+        .bar-country {
+            background-color: yellow;
+            padding: 10px;
+            text-align: left;
+            margin: 2px;
+            border: #e5941b 1px solid;
+            border-radius: 5px;
+        }
+
+        .bar-size {
+            background-color:darkgray ;
+            padding: 10px;
+            margin: 2px;
+            border: #e5941b 1px solid;
+            border-radius: 5px;
+        }
+
+        .bar-value {
+            background-color:aquamarine;
+            padding: 10px;
+            margin: 2px;
+            border: #e5941b 1px solid;
+            border-radius: 5px;
+
+        }
   </style>
-  <script src="./main.js" type="module"></script> 
 
-  
-  </head>
-  <body>
-    <div class="wrapper">
-        <h1 style="text-align: center; letter-spacing: 3px;">World Countries List</h1>
-        <p style="text-align: center; font-size: 1rem;">Total Number of Countries: <span id="country-count"></span></p>
 
-        <div class="search-container" style="text-align: center;">
-          <p id="typedCount"></p>
-  
-            <div class="buttons">
-              <button id="starting-word-btn" >Starting Word</button>
-              <button id="any-word-btn">Search with Any Word</button>
-              <button id="sort-btn">Sort</button>
-            </div>
+</head>
 
-  
-          <div  style="margin: 10px;">
-              <input type="text" placeholder="Search country ..." id="search-bar">
-              <button>
-                    <img src="https://img.icons8.com/ios-filled/50/000000/search.png" alt="Search Icon">
-              </button>
-          </div>
+<body>
+  <div class="wrapper">
+    <h1 style="text-align: center; letter-spacing: 3px; margin: 1px;">World Countries List</h1>
+    <p style="text-align: center; font-size: 1rem; margin: 1px; border: 1px dashed red; padding: 3px;">Total Number of
+      Countries: <span id="country-count"></span></p>
 
-          <div id="search-result" style="text-align: center;"></div>
+    <div class="search-container" style="text-align: center;">
+      <p id="typedCount" sty>Items satisfying the criteria <span id="itmcount"></span></p>
 
+
+      <form id="search-form" name="myForm">
+
+        <input type="text" placeholder="Search countries by name, capital and language" id="search-bar"><br>
+
+        <fieldset>
+          <legend>Click to sort:</legend>
+
+          <label for="contryname">CountryName</label>
+          <input type="radio" id="contryname" name="radio_group" value="name" onclick="handleClick(this);" >
+
+          <label for="capital">Capital</label>
+          <input type="radio" id="capital" name="radio_group" value="capital" onclick="handleClick(this);">
+
+          <label for="population">Population</label>
+          <input type="radio" id="population" name="radio_group" value="population" onclick="handleClick(this);">
+
+            <img id="secondUIComponent" src="https://www.chartjs.org/img/chartjs-logo.svg" alt="📊" height="50px"
+            width="50px" style="padding: 10px 20px; margin: 5px; cursor: pointer;" onclick="document.getElementById('chartContainer').scrollIntoView();">
+
+        </fieldset>
+      </form> <br>
+    </div>
+
+    <div id="search-result" style="text-align: center;"></div>
+
+    <div id="chartContainer">
+      <div class="header">
+          <h1 style="margin: 1px;">World Countries Data</h1>
+          <p id="chartsubheading" style="margin: 1px;"></p>
       </div>
 
-    </div>
-  </body>
+      <div class="DataContainer">
+      </div>
+
+  </div>
+    
+
+
+
+  </div>
+
+
+  <script src="./main.js" type="module"></script>
+</body>
+
 </html>
